@@ -22,11 +22,11 @@ describe('Testing angular page', function(){
             cy.log('The name of the product is: ' + nameElement);
               if(this.data.products.includes(nameElement)){
                 cy.log('The element was found: ' + nameElement);
-                products.getSelectProducts($element);
+                products.selectProduct($element);
             }
         });
 
-        cy.contains('Checkout').click();
+        products.checkout();       
         cy.get('.btn.btn-success').click();
         cy.get('.input-field label').then((str)=>{
             cy.log(str.text().includes('Please choose your delivery'));

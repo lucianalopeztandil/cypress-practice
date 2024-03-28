@@ -6,10 +6,14 @@ class productspage {
         return cy.get('app-card-list app-card');
     }
 
-    getSelectProducts(element){
+    selectProduct(element){
         cy.log('*******************************************');
         cy.log('The element who button will be selected is: ' + element.find('.card-title a').text())
         cy.wrap(element).find('button').click();
+    }
+
+    checkout(){
+        cy.contains('Checkout').click();
     }
 
 }
