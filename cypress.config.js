@@ -1,6 +1,7 @@
 const { defineConfig } = require("cypress");
 
 module.exports = defineConfig({
+  projectId: 'n7hjgp',
   defaultCommandTimeout: 6000,
   env:{
     url: "https://rahulshettyacademy.com/"
