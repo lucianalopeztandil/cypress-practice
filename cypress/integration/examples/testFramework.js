@@ -1,6 +1,7 @@
 /// <reference types="Cypress"/>
 import productspage from "../../pom/productspage";
-
+import verificationpage from "../../pom/verificationpage";
+import confirmationpage from "../../pom/confirmationpage";
 
 describe('Testing angular page', function(){
 
@@ -12,10 +13,12 @@ describe('Testing angular page', function(){
     )})
 
     it('Complete operation', function(){
-        cy.visit('https://rahulshettyacademy.com/angularpractice/shop');
+        cy.visit(Cypress.env('url')+'angularpractice/shop');
 
         const products = new productspage();
+        const verification = new verificationpage();
         const arrayProducts = products.getProducts();
+        const confirmation = new confirmationpage();
 
         arrayProducts.each(($element, index, $list)=>{
             const nameElement = $element.find('.card-title a').text();
@@ -26,11 +29,10 @@ describe('Testing angular page', function(){
             }
         });
 
-        products.checkout();       
-        cy.get('.btn.btn-success').click();
-        cy.get('.input-field label').then((str)=>{
-            cy.log(str.text().includes('Please choose your delivery'));
-        })
+        products.checkout();
+        verification.verifyTotalAmount();
+        verification.selectSuccessButton();
+        confirmation.selectCountry();
     })
 
 });
